@@ -12,7 +12,6 @@ defmodule FireTest do
     assert_receive {:advance_fire, ^xy}
   end
 
-  @tag :skip
   test "burn for `intensity` number of `:advance` messages" do
     # ask to receive a message when `fire` exits:
     Process.flag(:trap_exit, true)

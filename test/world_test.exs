@@ -4,7 +4,6 @@ defmodule WorldTest do
 
   alias ForestFireSim.{Forest, World}
 
-  @tag :skip
   test "starts fires for all initial fires" do
     forest = Forest.from_string("&*")
     test_process = self
@@ -18,7 +17,6 @@ defmodule WorldTest do
     assert_receive {:fire_started, ^xy, ^intensity}
   end
 
-  @tag :skip
   test "allows another process to peek at locations" do
     forest = Forest.from_string("&*")
     fire_starter = fn _fire -> :ok end
@@ -35,7 +33,6 @@ defmodule WorldTest do
     assert_receive {:debug_location_response, :tree}
   end
 
-  @tag :skip
   test "can advance a fire" do
     forest = Forest.from_string("&*")
     fire_starter = fn _fire -> :ok end
@@ -53,7 +50,6 @@ defmodule WorldTest do
     assert_receive {:debug_location_response, {:fire, ^fresh_fire_intensity}}
   end
 
-  @tag :skip
   test "starts new fires during an advance" do
     forest = Forest.from_string("&*")
     test_process = self
@@ -70,7 +66,6 @@ defmodule WorldTest do
     assert_receive {:fire_started, ^neighbor_xy, ^intensity}
   end
 
-  @tag :skip
   test "can render the current state of the world" do
     forest = Forest.from_string("&*")
     fire_starter = fn _fire -> :ok end

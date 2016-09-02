@@ -1,8 +1,6 @@
 defmodule ForestFireSim.Fire do
   def ignite(world, xy, intensity) do
-    spawn_link(fn ->
-      loop(world, xy, intensity)
-    end)
+    spawn_link(__MODULE__, :loop, [world, xy, intensity])
   end
 
   def loop(_world, _xy, 0), do: nil

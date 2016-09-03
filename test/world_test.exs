@@ -8,13 +8,13 @@ defmodule WorldTest do
     forest = Forest.from_string("&*")
     test_process = self
     fire_starter = fn {xy, intensity} ->
-      send(test_process, {:fire_started, xy, intensity})
+      send(test_process, {:fire_started, xy, intensity, self})
     end
-    World.create(forest, fire_starter)
+    world = World.create(forest, fire_starter)
 
     xy = {0, 0}
     intensity = 4
-    assert_receive {:fire_started, ^xy, ^intensity}
+    assert_receive {:fire_started, ^xy, ^intensity, ^world}
   end
 
   test "allows another process to peek at locations" do

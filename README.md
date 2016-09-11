@@ -1,20 +1,19 @@
-# Forest Fire Simulation
+# Jeremy's Version of JEG2's Forest Fire Simulation
 
-The goal of this exercise is to build a simulation of a forest fire spreading through some trees.
+I attended the awesome [SimAlchemy](http://elixirconf.com/2016/speakers.html#grayii) workshop from [James Edward Gray II](http://graysoftinc.com/) at ElixirConf2016.  It was a workshop on Elixir processes and OTP; we used them to build simulations.
 
-A `ForestFireSim.Forest` data structure is already provided, but modules for the individual processes involved in the simulation had been left out.  You can look through the documentation of `ForestFireSim.Forest` to learn which operations are provided.  (You won't need to add anymore.)
+This is my solution for a [forest-fire simulation that Gray started](https://github.com/JEG2/simulations/tree/master/forest_fire_sim).  The tests all pass, and the simulation works.  I've made my own additions and clean ups.  See the commits on this repo to see my changes.
 
-A `ForestFireSim.Fire` process will be spawned as each fire ignites.  It should use the arrival of `:advance` messages to notify the `world` of the change, until its `intensity` runs out.
+## Running the tests
 
-There also will be one `ForestFireSim.World` process that will track the current state of the `forest` and `:render` it to the screen on demand.
+1. Clone this repo.
+1. `mix deps.get`
+1. `mix test`
 
-You can use the tests to recreate these processes.  Start with `ForestFireSim.Fire`.  It has no dependencies.  You can move to `ForestFireSim.World` next, which makes use of the `ForestFireSim.Forest` data structure.
+## Running the simulation
 
-## Instructions
+1. Clone this repo.
+1. `mix deps.get`
+1. `iex -S mix`
 
-1. Run `mix test --exclude todo`
-2. Fix the failing test
-3. Remove the highest `@tag todo: true` line found in `test/fire_test.exs` or
-   `test/world_test.exs`
-4. If a line was removed in step 3, go back to step 1
-5. Run `mix` to view the final simulation
+Hit C-c C-c or C-\ to exit the simulation.

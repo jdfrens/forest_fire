@@ -4,12 +4,15 @@ defmodule ForestFireSim do
   @interval 500
 
   def start do
-    forest = Forest.generate(%{width: 80, height: 24, percent: 66})
-    fire_starter = fn {xy, intensity} ->
-      fire = Fire.ignite(self, xy, intensity)
-      :timer.send_interval(@interval, fire, :advance)
-    end
-    world = World.create(forest, fire_starter)
+    {:ok, width}  = :io.columns
+    {:ok, height} = :io.rows
+    forest = Forest.generate(%{width: width, height: height, percent: 66})
+    world  = World.create(forest, &fire_starter/1)
     :timer.send_interval(@interval, world, :render)
+  end
+
+  def fire_starter({xy, intensity}) do
+    fire = Fire.ignite(self, xy, intensity)
+    :timer.send_interval(@interval, fire, :advance)
   end
 end
